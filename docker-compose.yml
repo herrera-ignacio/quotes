@@ -1,0 +1,25 @@
+version: "3"
+services:
+    db:
+        image: mysql:8
+        command: --default-authentication-plugin=mysql_native_password
+        restart: always
+        ports:
+            - "3306:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: test_root_secret
+            MYSQL_USER: test_user
+            MYSQL_PASSWORD: test_secret
+            MYSQL_DATABASE: test_db
+    server:
+        restart: always
+        build:
+            context: ./
+        ports:
+            - "3001:3001"
+        env_file:
+            - ./.env
+        depends_on:
+            - db
+        volumes:
+            - .:/usr/app
