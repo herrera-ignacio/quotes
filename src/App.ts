@@ -24,6 +24,7 @@ class App {
       this.initializeMiddleware();
       this.initializeRoutes(this.routes);
       this.initializeErrorHandling();
+      this.listen();
     } catch (err) {
       console.error(`[ERROR] ${err.message}`)
       console.log('[APP] Retrying in 10 seconds...')
@@ -33,7 +34,7 @@ class App {
 
   private listen() {
     this.app.listen(this.port, () => {
-      console.log(`🚀 App listening on the port ${this.port}`);
+      console.log(`🚀 [APP] Listening on port ${this.port}`);
     });
   }
   
